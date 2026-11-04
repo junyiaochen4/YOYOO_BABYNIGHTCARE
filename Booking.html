@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>幼幼眠｜領取入園券</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yym.css">
+<style>
+body{margin:0}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div id="top" class="yym-root">
+<div class="yym-curtain" aria-hidden="true"><div class="yym-drop"><div class="yym-panel yym-l"></div><div class="yym-panel yym-r"></div><div class="yym-valance"></div></div></div>
+<div class="yym-spot" aria-hidden="true"></div>
+<input type="checkbox" id="yym-menu" class="yym-menu-chk" aria-label="開啟選單">
+<header class="yym-head"><div class="yym-head-in">
+<a href="index.html" class="yym-logo" aria-label="回到幼幼眠首頁"><img src="assets/logo-white.png" alt="幼幼眠 專業夜間幼兒照護機構"></a>
+<div style="display: flex; align-items: center; gap: 14px">
+<nav aria-label="主選單" class="yym-nav"><a href="index.html">開園序曲</a><a href="World.html">探索夢樂園</a><a href="Space.html">樂園地圖</a><a href="Team.html">樂園守夢人</a><a href="Night.html">一夜遊園記</a><a href="Flow.html">安心守護站</a><a href="Contact.html">樂園服務台</a><a href="Talk.html">親子彩排室</a><a href="Member.html">我的樂園</a><a href="Booking.html" class="yym-marquee">領取入園券</a></nav>
+<label for="yym-menu" class="yym-burger" aria-label="開啟選單"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></label>
+</div></div><div class="yym-canopy" aria-hidden="true"></div></header>
+<label for="yym-menu" class="yym-scrim" aria-label="關閉選單"></label>
+<nav aria-label="樂園選單" class="yym-drawer"><label for="yym-menu" class="yym-drawer-close" aria-label="關閉選單">×</label><a href="index.html">開園序曲<small>理念</small></a><a href="World.html">探索夢樂園<small>世界觀</small></a><a href="Space.html">樂園地圖<small>場所</small></a><a href="Team.html">樂園守夢人<small>托育員</small></a><a href="Night.html">一夜遊園記<small>一夜流程</small></a><a href="Flow.html">安心守護站<small>接送與應變</small></a><a href="Contact.html">樂園服務台<small>聯絡資訊</small></a><a href="Talk.html">親子彩排室<small>親子溝通</small></a><a href="Member.html">我的樂園<small>會員專區</small></a><a href="Booking.html" class="yym-marquee">領取入園券</a></nav>
+
+<section class="yym-wrap" style="padding-top: 72px">
+<p class="yym-label">BOOKING</p>
+<h1 class="yym-h1">領取入園券</h1>
+<p class="yym-muted" style="margin: 0 0 16px">選擇日期與時段、填寫資料，專人將於 1–2 個工作天內來電確認。</p>
+<div role="radiogroup" aria-label="預約類型" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px">
+<sc-for list="{{ types }}" as="t" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{ t.checked }}" onClick="{{ t.pick }}" class="yym-cloud mid {{ t.cls }}" style="min-width: 230px"><span style="font-size: 18px; font-weight: 900">{{ t.label }}</span><span style="font-size: 14px; font-weight: 400">{{ t.sub }}</span></button></sc-for>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div class="yym-card">
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px"><h2 style="margin: 0; font-size: 19px">1　選擇日期</h2><p style="margin: 0; font-weight: 700; color: #FFEC51">2026 年 11 月</p></div>
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; text-align: center; font-size: 13px; color: #8D97A6; margin-bottom: 6px"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{ days }}" as="d" hint-placeholder-count="30"><button type="button" onClick="{{ d.pick }}" disabled="{{ d.disabled }}" aria-label="{{ d.aria }}" aria-pressed="{{ d.pressed }}" style="{{ d.style }}">{{ d.n }}</button></sc-for>
+</div>
+<p class="yym-muted" style="margin: 12px 0 0; font-size: 13px">藍色：已選擇・斜線：已額滿・灰色：不開放</p>
+</div>
+<div class="yym-card" style="display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; font-size: 19px">2　選擇時段</h2>
+<sc-if value="{{ noDate }}" hint-placeholder-val="{{ true }}"><p class="yym-muted" style="margin: 0">請先選擇日期</p></sc-if>
+<sc-if value="{{ hasDate }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ isStay }}" hint-placeholder-val="{{ true }}">
+<p id="g-in" style="margin: 8px 0 0; font-weight: 700; color: #81C7E8">入托（{{ dayLabel }}傍晚）</p>
+<div role="radiogroup" aria-labelledby="g-in" style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{ inSlots }}" as="s" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{ s.checked }}" disabled="{{ s.disabled }}" onClick="{{ s.pick }}" class="yym-cloud {{ s.cls }}">{{ s.label }}<span style="font-size: 12px; font-weight: 400">{{ s.left }}</span></button></sc-for>
+</div>
+<p id="g-out" style="margin: 12px 0 0; font-weight: 700; color: #F5A27C">離托（{{ nextLabel }}清晨）</p>
+<div role="radiogroup" aria-labelledby="g-out" style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{ outSlots }}" as="s" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{ s.checked }}" onClick="{{ s.pick }}" class="yym-cloud {{ s.cls }}">{{ s.label }}</button></sc-for>
+</div>
+<p id="g-room" style="margin: 16px 0 0; font-weight: 700; color: #FFEC51">選擇主題房<span class="yym-muted" style="font-weight: 400; font-size: 13px">　每間 4 位孩子・2 位托育員</span></p>
+<div role="radiogroup" aria-labelledby="g-room" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 12px">
+<sc-for list="{{ rooms }}" as="r" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{ r.checked }}" aria-label="{{ r.aria }}" disabled="{{ r.disabled }}" onClick="{{ r.pick }}" class="yym-cloud mid" style="{{ r.style }}"><span style="font-size: 17px; font-weight: 900">{{ r.name }}</span><span style="display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500"><sc-for list="{{ r.dots }}" as="d" hint-placeholder-count="4"><span aria-hidden="true" style="{{ d.style }}"></span></sc-for>　{{ r.leftText }}</span></button></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ isVisit }}" hint-placeholder-val="{{ false }}">
+<p class="yym-muted" style="margin: 8px 0 0; font-size: 14px">參觀時段 17:00–19:00，每組 1 小時，同時段最多 2 組。</p>
+<div role="radiogroup" aria-label="參觀時段" style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{ visitSlots }}" as="s" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{ s.checked }}" disabled="{{ s.disabled }}" onClick="{{ s.pick }}" class="yym-cloud {{ s.cls }}">{{ s.label }}<span style="font-size: 12px; font-weight: 400">{{ s.left }}</span></button></sc-for>
+</div>
+</sc-if>
+</sc-if>
+</div>
+</div>
+
+<div class="yym-card" style="flex: 1.3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 19px">3　填寫資料</h2>
+<p class="yym-label" style="margin: 4px 0 0">托育兒童</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+<label class="yym-fl">兒童姓名 <span class="yym-req">*</span><input type="text" class="yym-inp" value="{{ f.cname }}" onChange="{{ on.cname }}"></label>
+<label class="yym-fl">出生日期 <span class="yym-req">*</span><input type="date" class="yym-inp" value="{{ f.cbirth }}" onChange="{{ on.cbirth }}" style="color-scheme: dark"></label>
+<label class="yym-fl">性別 <span class="yym-req">*</span><select class="yym-inp" value="{{ f.cgender }}" onChange="{{ on.cgender }}"><option value="">請選擇</option><option value="男">男</option><option value="女">女</option></select></label>
+</div>
+<sc-if value="{{ isStay }}" hint-placeholder-val="{{ true }}">
+<fieldset style="margin: 0; padding: 12px 16px; border: 1px solid #33414F; border-radius: 12px">
+<legend style="font-weight: 700; font-size: 15px; padding: 0 6px">是否需要代訂餐點 <span class="yym-req">*</span></legend>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 44px"><input type="radio" name="meal" checked="{{ mealNo }}" onChange="{{ pickMealNo }}" style="width: 20px; height: 20px; accent-color: #81C7E8">否</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 44px"><input type="radio" name="meal" checked="{{ mealYes }}" onChange="{{ pickMealYes }}" style="width: 20px; height: 20px; accent-color: #81C7E8">是</label>
+<span class="yym-muted" style="font-size: 14px">每份收費 [金額待定]・當月餐點表 [待補]</span>
+</div>
+</fieldset>
+</sc-if>
+<p class="yym-label" style="margin: 8px 0 0">申請人</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<label class="yym-fl">申請人姓名 <span class="yym-req">*</span><input type="text" class="yym-inp" value="{{ f.pname }}" onChange="{{ on.pname }}"></label>
+<label class="yym-fl">申請人電話 <span class="yym-req">*</span><input type="tel" class="yym-inp" value="{{ f.pphone }}" onChange="{{ on.pphone }}"></label>
+<label class="yym-fl">申請人地址 <span class="yym-req">*</span><input type="text" class="yym-inp" value="{{ f.paddr }}" onChange="{{ on.paddr }}"></label>
+<label class="yym-fl">申請人信箱 <span class="yym-req">*</span><input type="email" class="yym-inp" value="{{ f.pemail }}" onChange="{{ on.pemail }}"></label>
+<label class="yym-fl">第二聯絡人姓名<input type="text" class="yym-inp" value="{{ f.p2name }}" onChange="{{ on.p2name }}"></label>
+<label class="yym-fl">第二聯絡人電話<input type="tel" class="yym-inp" value="{{ f.p2phone }}" onChange="{{ on.p2phone }}"></label>
+</div>
+<div style="background: #0E131B; border-radius: 12px; padding: 12px 16px; font-size: 14px; color: #A9B3C2">
+<p style="margin: 0">家長可先填寫托育契約電子檔，回寄至 [托育所信箱]，節省現場作業時間。<span style="color: #F5A27C; font-weight: 700">托育契約下載（檔案待補）</span></p>
+<p style="margin: 4px 0 0">※ 手足不符收托年齡仍須同時段臨托，請以電話聯絡預約。</p>
+</div>
+<label class="yym-fl">備註<textarea rows="3" class="yym-inp" value="{{ f.cnote }}" onChange="{{ on.cnote }}" placeholder="如收托兒童之體質、遺傳或特殊疾病、過敏藥物與食物等，以利托育人員照顧" style="resize: vertical"></textarea></label>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="captcha" class="yym-fl">驗證碼 <span class="yym-req">*</span></label>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px">
+<input id="captcha" type="text" inputmode="numeric" maxlength="4" class="yym-inp" value="{{ f.captcha }}" onChange="{{ on.captcha }}" placeholder="輸入驗證碼" style="width: 150px">
+<svg width="160" height="48" viewBox="0 0 170 56" role="img" aria-label="驗證碼圖片，可按語音播放收聽" style="background: #0E131B; border: 1px solid #33414F; border-radius: 10px; flex: 0 0 auto">
+<sc-for list="{{ capLines }}" as="l" hint-placeholder-count="5"><line x1="{{ l.x1 }}" y1="{{ l.y1 }}" x2="{{ l.x2 }}" y2="{{ l.y2 }}" stroke="{{ l.c }}" stroke-width="1.5"></line></sc-for>
+<sc-for list="{{ capDigits }}" as="d" hint-placeholder-count="4"><text x="{{ d.x }}" y="38" font-size="30" font-weight="700" fill="{{ d.c }}" transform="rotate({{ d.r }} {{ d.x }} 30)" font-family="Georgia, serif">{{ d.ch }}</text></sc-for>
+</svg>
+<button type="button" onClick="{{ regen }}" class="yym-cloud" style="font-size: 14px">重新產生</button>
+<button type="button" onClick="{{ speak }}" class="yym-cloud pri" style="font-size: 14px">語音播放</button>
+</div>
+</div>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 15px"><input type="checkbox" checked="{{ agree }}" onChange="{{ toggleAgree }}" style="width: 20px; height: 20px; margin-top: 3px; accent-color: #81C7E8"><span>我已閱讀並同意<a href="index.html">收托標準與托育規範</a>及個資使用說明</span></label>
+<sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; padding: 10px 14px; background: #3A1210; color: #F4A7A0; border-radius: 10px; font-size: 15px">{{ error }}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #24303F">
+<p class="yym-muted" style="margin: 0; font-size: 15px">{{ summary }}</p>
+<sc-if value="{{ valid }}" hint-placeholder-val="{{ false }}"><a href="BookingDone.html" class="yym-marquee lg">送出申請</a></sc-if>
+<sc-if value="{{ invalid }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ check }}" class="yym-marquee lg" style="opacity: 0.85">送出申請</button></sc-if>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="yym-foot"><div class="yym-foot-in"><p style="margin: 0">幼幼眠・專業夜間幼兒照護機構</p><p style="margin: 0">第四組 畢業專題概念網站・內容為設計提案</p></div></footer>
+<a href="#top" class="yym-top" aria-label="回到頂部"><svg width="60" height="76" viewBox="0 0 60 76" aria-hidden="true"><rect x="29" y="0" width="2" height="10" fill="#81C7E8"></rect><path d="M14 24 A16 15 0 0 1 46 24 Z" fill="#1863A1"></path><rect x="14" y="23" width="32" height="5" fill="#1863A1"></rect><path d="M15 25.5 q2.5 2.2 5 0 t5 0 t5 0 t5 0 t5 0 t5 0" stroke="#FFFFFF" stroke-width="1.2" fill="none"></path><path class="beam" d="M17 28 L43 28 L56 76 L4 76 Z" fill="#FFEC51"></path><text x="30" y="62" text-anchor="middle" font-size="11" font-weight="900" letter-spacing="1.5" fill="#0B0D12">TOP</text></svg></a>
+</div>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="dc-mini.js"></script>
+<script>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { type: 'stay', day: null, inSlot: null, outSlot: null, vSlot: null, room: null, meal: 'no', agree: false, error: '', cap: this.makeCap(),
+f: { cname: '', cbirth: '', cgender: '', pname: '', pphone: '', paddr: '', pemail: '', p2name: '', p2phone: '', cnote: '', captcha: '' } };
+}
+componentDidMount() { const h = document.querySelector('.yym-head'); if (h) document.documentElement.style.setProperty('--hh', h.offsetHeight + 'px'); this._mv = (e) => { const r = document.documentElement; r.style.setProperty('--mx', e.clientX + 'px'); r.style.setProperty('--my', e.clientY + 'px'); }; window.addEventListener('mousemove', this._mv); }
+componentWillUnmount() { window.removeEventListener('mousemove', this._mv); }
+makeCap() {
+const cols = ['#81C7E8', '#FFEC51', '#ED6D1F', '#ABC824', '#FCE5E8'];
+const rnd = (a, b) => a + Math.random() * (b - a);
+const code = String(Math.floor(1000 + Math.random() * 9000));
+return { code,
+digits: code.split('').map((ch, i) => ({ ch, x: Math.round(18 + i * 37 + rnd(-3, 3)), r: Math.round(rnd(-25, 25)), c: cols[i % 5] })),
+lines: [0, 1, 2, 3, 4].map((i) => ({ x1: Math.round(rnd(0, 60)), y1: Math.round(rnd(5, 51)), x2: Math.round(rnd(110, 170)), y2: Math.round(rnd(5, 51)), c: cols[(i + 2) % 5] })) };
+}
+problem() {
+const s = this.state, f = s.f;
+const slotOk = s.type === 'stay' ? (s.inSlot && s.outSlot && s.room) : s.vSlot;
+if (!s.day || !slotOk) return s.type === 'stay' ? '請選擇日期、入托與離托時段，以及主題房。' : '請選擇日期與參觀時段。';
+if (!f.cname.trim() || !f.cbirth || !f.cgender || !f.pname.trim() || !f.paddr.trim() || !f.pemail.trim()) return '請填寫標示 * 的必填欄位。';
+if (f.pphone.replace(/\D/g, '').length < 9) return '請輸入正確的申請人電話。';
+if (f.pemail.indexOf('@') < 1) return '請輸入正確的申請人信箱。';
+if (f.captcha.trim() !== s.cap.code) return '驗證碼不正確，請重新輸入。';
+if (!s.agree) return '請勾選同意收托標準與托育規範。';
+return '';
+}
+renderVals() {
+const s = this.state;
+const wk = ['日', '一', '二', '三', '四', '五', '六'];
+const full = [6, 13, 20, 27];
+const cb = 'font: inherit; font-size: 15px; aspect-ratio: 1 / 1; min-height: 40px; border-radius: 50%; border: none; ';
+const days = [];
+for (let n = 1; n <= 30; n++) {
+const w = (n - 1) % 7;
+const closed = n <= 1;
+const isFull = !closed && full.indexOf(n) >= 0;
+const sel = s.day === n;
+const style = sel ? cb + 'background: #81C7E8; color: #0E2F52; font-weight: 900'
+: closed ? cb + 'background: transparent; color: #45525F'
+: isFull ? cb + 'background: transparent; color: #8C6A72; text-decoration: line-through'
+: cb + 'background: #1D2735; color: #F2F4FA';
+days.push({ n, style, disabled: closed || isFull, pressed: sel ? 'true' : 'false', aria: '11 月 ' + n + ' 日（' + wk[w] + '）' + (closed ? '不開放' : isFull ? '已額滿' : ''),
+pick: () => { if (!closed && !isFull) this.setState({ day: n, inSlot: null, outSlot: null, vSlot: null, room: null, error: '' }); } });
+}
+const mk = (label, left, key, unit) => ({ label, cls: s[key] === label ? 'is-on' : '', checked: s[key] === label ? 'true' : 'false', disabled: left === 0, left: left === null ? '' : left === 0 ? '額滿' : '剩 ' + left + unit, pick: () => { if (left !== 0) this.setState({ [key]: label, error: '' }); } });
+const on = {};
+Object.keys(s.f).forEach((k) => { on[k] = (e) => this.setState({ f: Object.assign({}, this.state.f, { [k]: e.target.value }), error: '' }); });
+const dayLabel = s.day ? '11/' + s.day + '（' + wk[(s.day - 1) % 7] + '）' : '';
+const nextLabel = s.day ? (s.day === 30 ? '12/1' : '11/' + (s.day + 1)) + '（' + wk[s.day % 7] + '）' : '';
+let when = '';
+if (s.day) when = s.type === 'stay' ? dayLabel + (s.inSlot ? ' 入托 ' + s.inSlot : '') + (s.outSlot ? '・離托 ' + s.outSlot : '') : dayLabel + (s.vSlot ? ' ' + s.vSlot : '');
+const roomDefs = [['積木夢城', '#81C7E8', '#0E2F52'], ['月光搖搖馬', '#FFEC51', '#3A3000'], ['晚安小火車', '#ED6D1F', '#2A1100'], ['星光摩天輪', '#1863A1', '#FFFFFF']];
+const d0 = s.day || 0;
+const lefts = [(d0 * 3 + 1) % 5, (d0 * 7 + 2) % 5, (d0 + 3) % 5, (d0 * 5 + 4) % 5].map((x) => Math.min(4, x));
+const rooms = roomDefs.map(([name, bg, fg], i) => {
+const left = lefts[i], sel = s.room === name, off = left === 0;
+const style = 'width: 100%; min-height: 104px; ' + (sel ? 'background: ' + bg + '; color: ' + fg : off ? '' : 'background: #26323F; color: #F2F4FA; box-shadow: inset 6px 0 0 ' + bg);
+return { name, checked: sel ? 'true' : 'false', disabled: off, style, leftText: off ? '已額滿' : '剩 ' + left + ' / 4 位',
+aria: name + (off ? '，已額滿' : '，剩 ' + left + ' 位'),
+dots: [0, 1, 2, 3].map((k) => ({ style: 'width: 9px; height: 9px; border-radius: 50%; background: ' + (k < 4 - left ? 'rgba(127,127,127,.45)' : (sel ? fg : bg)) })),
+pick: () => { if (!off) this.setState({ room: name, error: '' }); } };
+});
+if (s.room && s.type === 'stay') when += '・' + s.room;
+const valid = !this.problem();
+return {
+types: [['stay', '預約入托', '17:00 入托・隔日 9:00 前離托'], ['visit', '預約參觀', '17:00–19:00・每組 1 小時']].map(([id, label, sub]) => ({ label, sub, cls: s.type === id ? 'is-on' : '', checked: s.type === id ? 'true' : 'false', pick: () => this.setState({ type: id, day: null, inSlot: null, outSlot: null, vSlot: null, room: null, error: '' }) })),
+rooms,
+days,
+inSlots: [['17:00–17:30', 6], ['17:30–18:00', 4]].map(([l, n]) => mk(l, n, 'inSlot', ' 位')),
+outSlots: ['7:00–7:30', '7:30–8:00', '8:00–8:30', '8:30–9:00'].map((l) => mk(l, null, 'outSlot', '')),
+visitSlots: [['17:00–18:00', 2], ['18:00–19:00', 1]].map(([l, n]) => mk(l, n, 'vSlot', ' 組')),
+isStay: s.type === 'stay', isVisit: s.type === 'visit', noDate: !s.day, hasDate: !!s.day, dayLabel, nextLabel,
+on, f: s.f, agree: s.agree,
+mealNo: s.meal === 'no', mealYes: s.meal === 'yes',
+pickMealNo: () => this.setState({ meal: 'no' }), pickMealYes: () => this.setState({ meal: 'yes' }),
+capDigits: s.cap.digits, capLines: s.cap.lines,
+regen: () => this.setState({ cap: this.makeCap(), f: Object.assign({}, this.state.f, { captcha: '' }) }),
+speak: () => { try { const u = new SpeechSynthesisUtterance(this.state.cap.code.split('').join('，')); u.lang = 'zh-TW'; u.rate = 0.8; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {} },
+toggleAgree: (e) => this.setState({ agree: e.target.checked, error: '' }),
+summary: when ? '已選：' + when : '尚未選擇日期與時段',
+valid, invalid: !valid,
+hasError: !!s.error, error: s.error,
+check: () => this.setState({ error: this.problem() })
+};
+}
+}
+DCMini.mount(Component);
+</script>
+</body>
+</html>

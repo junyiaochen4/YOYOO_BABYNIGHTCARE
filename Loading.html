@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>幼幼眠｜載入中</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yym.css">
+<style>
+body{margin:0}
+@keyframes yymWalk{0%{left:12%}45%{left:78%}50%{left:78%}95%{left:12%}100%{left:12%}}
+@keyframes yymFace{0%,47%{transform:scaleX(1)}50%,97%{transform:scaleX(-1)}100%{transform:scaleX(1)}}
+@keyframes yymBob{0%{transform:translateY(0) rotate(-4deg)}100%{transform:translateY(-10px) rotate(4deg)}}
+@keyframes yymFlicker{0%,100%{opacity:.9}48%{opacity:.75}52%{opacity:.95}}
+@keyframes yymDots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+.yym-walker{position:absolute;bottom:22%;width:0;animation:yymWalk 9s ease-in-out infinite}
+.yym-beam{position:absolute;bottom:-14px;left:-170px;width:340px;height:120vh;background:linear-gradient(180deg,rgba(255,240,170,0) 0%,rgba(255,236,81,.10) 40%,rgba(255,236,81,.32) 100%);clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);animation:yymFlicker 3s infinite;pointer-events:none}
+.yym-pool{position:absolute;bottom:-26px;left:-130px;width:260px;height:44px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,236,81,.45),rgba(255,236,81,0) 70%)}
+.yym-face{position:absolute;bottom:0;left:-70px;width:140px;animation:yymFace 9s ease-in-out infinite}
+.yym-face img{display:block;width:140px;height:auto;animation:yymBob .45s ease-in-out infinite alternate;transform-origin:50% 100%}
+.yym-dots::after{content:'';animation:yymDots 1.6s steps(1) infinite}
+@media (prefers-reduced-motion: reduce){.yym-walker,.yym-face,.yym-face img,.yym-beam{animation:none}.yym-walker{left:50%}}
+</style>
+</head>
+<body>
+<div id="top" class="yym-root" style="height: 100vh; min-height: 640px; overflow: hidden; background: #050507">
+<div class="yym-spot" aria-hidden="true"></div>
+<a href="index.html" class="yym-logo" aria-label="回到幼幼眠首頁" style="position: absolute; top: 20px; left: 24px; z-index: 5"><img src="assets/logo-white.png" alt="幼幼眠 專業夜間幼兒照護機構" style="height: 44px; width: auto"></a>
+
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(180deg, #0A0F16, #050507); border-top: 1px solid #18202A"></div>
+<div class="yym-walker" aria-hidden="true">
+<div class="yym-beam"></div>
+<div class="yym-pool"></div>
+<div class="yym-face"><img src="assets/koala1.png" alt=""></div>
+</div>
+
+<div role="status" aria-live="polite" style="position: absolute; left: 0; right: 0; top: 18%; text-align: center; padding: 0 24px">
+<p class="yym-label">LOADING</p>
+<h1 style="margin: 0 0 12px; font-size: clamp(28px, 4vw, 40px); font-weight: 900">載入中<span class="yym-dots"></span></h1>
+<p class="yym-muted" style="margin: 0 0 24px; font-size: 17px">無尾熊團長正提著聚光燈，在黑暗裡幫你找路。</p>
+<a href="index.html" class="yym-cloud">等太久了？回到首頁</a>
+</div>
+</div>
+<script>
+(function(){function hh(){var h=document.querySelector(".yym-head");if(h)document.documentElement.style.setProperty("--hh",h.offsetHeight+"px");}hh();window.addEventListener("resize",hh);window.addEventListener("mousemove",function(e){var r=document.documentElement;r.style.setProperty("--mx",e.clientX+"px");r.style.setProperty("--my",e.clientY+"px");});})();
+</script>
+</body>
+</html>
